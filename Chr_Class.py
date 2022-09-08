@@ -4,7 +4,7 @@ class Chromosome:
 		self.name = name
 		self.start = start
 		self.end = end	
-		self.cent = None
+		self.cent = cent
 
 	def addCent(self, newCent):
 		self.cent = newCent
