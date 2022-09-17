@@ -21,6 +21,10 @@ def main():
 
 	#read in each genome
 	for file in os.listdir():
+		#define a genome object to exist within the scope of this loop
+		#the genome object is used to hold the readInGenome() output, and then it is used as input for the writeing method
+		#then it falls out of scope
+		#this way memeory can be conserved
 		if file.endswith(".fna"):
 			readInGenome(file)
 
@@ -57,6 +61,7 @@ def readInGenome(filename):
 	#testing
 	print(currentGenome)
 	
+	return(currentGenome)
 
 
 
@@ -74,6 +79,7 @@ class Genome:
 		self.chrList.append(chromosome)
 
 	def __str__(self):
+		# <------------------------------Update this so it isnt so stupid <----------------------------------------------
 		print(self.genomeName)
 		for chromosome in self.chrList:
 			print(chromosome)
