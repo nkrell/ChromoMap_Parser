@@ -20,8 +20,6 @@ def main():
 			break
 	#navigate into target folder
 	os.chdir(targetFolder)
-	#list to hold chromosome objects
-	chrList = list()
 	#list for holding genome objects
 	genomeList = list()
 	#variable for holding length of chromosome
@@ -37,9 +35,14 @@ def main():
 		if file.endswith(".fna"):
 			#get name of genome
 			genomeName = file
+			#list to hold chromosome objects
+			chrList = list()
 			with open(file) as fh:
 				for line in fh:
 					if line.startswith(">"):
+						#trim header to assention number
+						line = line.split(" ")
+						line = line[0]
 						headerList.append(line.strip("\n"))
 						if chrLength != 0:
 							lengthList.append(chrLength)
@@ -51,14 +54,20 @@ def main():
 			#combine lists into a single data structure
 			for i in range(0, len(headerList)):
 				chrList.append(Chromosome(headerList[i], 1, lengthList[i], 0))
-			#genomeList.append()
-	for i in range(0, len(headerList)):
-		print(headerList[i])
-		print("\n")
-		print(lengthList[i])
-		print("\n")
+			genomeList.append(Genome(genomeName, chrList))
+
+	for genome in genomeList:
+		print(genome)
+		print(len(genome.chrList))
+		#for chrm in genome.chrList:
+			#print(chrm)
 	
-	
+	for genome in genomeList:
+		newFile = open(genome.name() + ".chromosome", "w")
+		for chrm in genome.chrList:
+			newFile.write(chrm.writeLine())
+
+		newFile.close()
 
 
 

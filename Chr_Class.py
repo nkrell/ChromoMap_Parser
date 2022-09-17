@@ -8,3 +8,18 @@ class Chromosome:
 
 	def addCent(self, newCent):
 		self.cent = newCent
+
+	def __str__(self):
+		return(self.name + "\t" + str(self.start) + "\t" + str(self.end) + "\n")
+
+	def chrName(self):
+		return(self.name)
+
+	def start(self):
+		return(self.start)
+
+	def end(self):
+		return(self.end)
+
+	def writeLine(self):
+		return(self.name + "\t" + str(self.start) + "\t" + str(self.end) + "\n")
