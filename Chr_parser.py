@@ -58,9 +58,7 @@ def main():
 
 	for genome in genomeList:
 		print(genome)
-		print(len(genome.chrList))
-		#for chrm in genome.chrList:
-			#print(chrm)
+		genome.printList()
 	
 	for genome in genomeList:
 		newFile = open(genome.name() + ".chromosome", "w")

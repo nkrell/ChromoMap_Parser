@@ -1,3 +1,4 @@
+#from Genome_Class import Genome as Genome
 class Chromosome:
 
 	def __init__(self, name, start, end, cent):
