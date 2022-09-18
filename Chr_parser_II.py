@@ -26,7 +26,11 @@ def main():
 		#then it falls out of scope
 		#this way memeory can be conserved
 		if file.endswith(".fna"):
-			readInGenome(file)
+			print("Reading file: " + file)
+			currentGenome = readInGenome(file)
+			print("Reading file: " + file + ".chrmap")
+			currentGenome.writeFile()
+
 
 def readInGenome(filename):
 	#declare required temporary variables
@@ -41,6 +45,7 @@ def readInGenome(filename):
 						#trim header to assention number
 						line = line.split(" ")
 						line = line[0]
+						line = line.lstrip(">")
 						chrName = line
 						if chrLength != 0:
 							#lengthList.append(chrLength)
@@ -57,11 +62,8 @@ def readInGenome(filename):
 		currentChromosome = Chromosome(chrName, 1, chrLength, 0)
 		#add chromosome object to currentGenome
 		currentGenome.addChromosome(currentChromosome)
-
-	#testing
-	print(currentGenome)
-	
 	return(currentGenome)
+
 
 
 
@@ -85,6 +87,22 @@ class Genome:
 			print(chromosome)
 		return(str(len(self.chrList)))
 
+	#class method for returning genome name when writing files
+	def getName(self):
+		return(self.genomeName)
+
+	#class method for retruning chrList when writing files
+	def getChrList(self):
+		return(self.chrList)
+
+	#self contained file-writing method
+	def writeFile(self):
+		newFile = open(self.genomeName + ".chrmap", "w")
+		for chromosome in self.chrList:
+			newFile.write(chromosome.chrName() + "\t" + str(chromosome.chrStart()) + "\t" + str(chromosome.chrEnd()))
+			newFile.write("\n")
+		newFile.close()
+
 class Chromosome:
 
 	def __init__(self, name, start, end, cent):
@@ -102,10 +120,10 @@ class Chromosome:
 	def chrName(self):
 		return(self.name)
 
-	def start(self):
+	def chrStart(self):
 		return(self.start)
 
-	def end(self):
+	def chrEnd(self):
 		return(self.end)
 
 	def writeLine(self):
