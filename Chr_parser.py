@@ -28,7 +28,7 @@ def main():
 		if file.endswith(".fna"):
 			print("Reading file: " + file)
 			currentGenome = readInGenome(file)
-			print("Reading file: " + file + ".chrmap")
+			print("Writing file: " + file + ".chrmap")
 			currentGenome.writeFile()
 
 
@@ -41,7 +41,8 @@ def readInGenome(filename):
 	#open file
 	with open(filename) as fh:
 		for line in fh:
-			if line.startswith(">"):
+			#if line.startswith(">"): <-----------------------------Old version
+			if lineTester(line):
 						#trim header to assention number
 						line = line.split(" ")
 						line = line[0]
@@ -64,7 +65,33 @@ def readInGenome(filename):
 		currentGenome.addChromosome(currentChromosome)
 	return(currentGenome)
 
+def lineTester(line):
+	if line.startswith(">"):
+		pass
+	else:
+		return(False)
 
+	if "CHROMOSOME" in line.upper():
+		pass
+	else:
+		return(False)
+
+	if "SCAFFOLD" not in line.upper():
+		pass
+	else:
+		return(False)
+
+	if "UNPLACED" not in line.upper():
+		pass
+	else:
+		return(False)
+	if "UNLOCALIZED" not in line.upper():
+		pass
+	else:
+		return(False)
+	
+	return(True)
+		
 
 
 
