@@ -2,12 +2,13 @@ import os
 import random
 
 def main():
-	newFile = open("A_real_genome.fna", "w")
-	for i in range(0, 22):
-		newFile.write(randomHeader(i))
-		newFile.write("\n")
-		for i in range(0,10000000):
-			newFile.write(randomCodon())
+	for i in range(0, 10):
+		newFile = open("A_real_genome_" + str(i) +"_.fna", "w")
+		for j in range(0, 22):
+			newFile.write(randomHeader(i))
+			newFile.write("\n")
+			for k in range(0,50000000):
+				newFile.write(randomCodon())
 		
 		#newFile.write(randomChromosome())
 		newFile.write("\n")
